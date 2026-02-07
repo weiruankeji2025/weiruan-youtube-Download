@@ -1,0 +1,406 @@
+/* ═══════════════════════════════════════════════════════
+   威软YouTube视频下载工具 - Popup Styles
+   Premium dark theme with glassmorphism
+   ═══════════════════════════════════════════════════════ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 420px;
+  min-height: 200px;
+  max-height: 580px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, sans-serif;
+  background: #0a0a1a;
+  color: #e2e8f0;
+  overflow: hidden;
+}
+
+.wr-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 580px;
+  background: linear-gradient(160deg, #0f0f23 0%, #131332 40%, #0f0f23 100%);
+}
+
+/* ── Header ── */
+.wr-header {
+  padding: 14px 18px;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.12));
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.wr-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wr-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+.wr-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wr-brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+}
+
+.wr-brand-ver {
+  font-size: 10px;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* ── Video Info ── */
+.wr-video-info {
+  display: flex;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.wr-video-thumb-wrap {
+  flex-shrink: 0;
+  width: 100px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.wr-video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wr-video-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+}
+
+.wr-video-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.wr-video-title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #cbd5e1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wr-video-meta {
+  font-size: 11px;
+  color: #475569;
+  margin-top: 4px;
+}
+
+/* ── Tabs ── */
+.wr-tabs {
+  display: flex;
+  padding: 0 18px;
+  gap: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.wr-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wr-tab:hover {
+  color: #a5b4fc;
+}
+
+.wr-tab.wr-active {
+  color: #818cf8;
+  border-bottom-color: #6366f1;
+}
+
+/* ── Content Area ── */
+.wr-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 18px 14px;
+  max-height: 320px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.25) transparent;
+}
+
+.wr-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.wr-content::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.25);
+  border-radius: 4px;
+}
+
+/* ── State Message (Loading / Empty) ── */
+.wr-state-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 0;
+  gap: 12px;
+  color: #475569;
+  font-size: 13px;
+}
+
+.wr-spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid rgba(99, 102, 241, 0.15);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: wr-spin 0.8s linear infinite;
+}
+
+@keyframes wr-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Format Item (Video/Audio) ── */
+.wr-format-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.wr-format-item:hover {
+  background: rgba(99, 102, 241, 0.06);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.wr-format-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.wr-format-quality {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wr-format-detail {
+  font-size: 10px;
+  color: #475569;
+  margin-top: 3px;
+}
+
+/* ── Badges ── */
+.wr-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.wr-badge-hd {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+}
+
+.wr-badge-4k {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+}
+
+.wr-badge-8k {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+.wr-badge-audio {
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
+}
+
+.wr-badge-combined {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+}
+
+/* ── Download Button ── */
+.wr-dl-btn {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+
+.wr-dl-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+}
+
+.wr-dl-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Subtitle Item ── */
+.wr-sub-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.wr-sub-item:hover {
+  background: rgba(99, 102, 241, 0.06);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.wr-sub-info {
+  flex: 1;
+}
+
+.wr-sub-lang {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.wr-sub-type {
+  font-size: 10px;
+  color: #475569;
+  margin-top: 2px;
+}
+
+.wr-sub-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.wr-sub-btn {
+  padding: 5px 10px;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 6px;
+  background: rgba(99, 102, 241, 0.08);
+  color: #a5b4fc;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wr-sub-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.45);
+}
+
+/* ── Section Header ── */
+.wr-section-header {
+  font-size: 10px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 10px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ── Footer ── */
+.wr-footer {
+  padding: 10px 18px;
+  text-align: center;
+  font-size: 10px;
+  color: #334155;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.wr-dot {
+  margin: 0 4px;
+  opacity: 0.5;
+}
+
+/* ── Error state ── */
+.wr-error-msg {
+  text-align: center;
+  padding: 24px 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.wr-error-msg strong {
+  display: block;
+  color: #f87171;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
