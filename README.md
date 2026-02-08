@@ -2,13 +2,13 @@
 
 <p align="center">
   <strong>WeiRuan YouTube Video Downloader</strong><br>
-  高清YouTube视频下载 · 自由选择分辨率 · 字幕下载 · 低内存占用
+  高清YouTube视频下载 · 自由选择分辨率 · 字幕下载 · 低内存占用 · Windows桌面版
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-6366f1?style=flat-square" alt="version">
   <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="license">
-  <img src="https://img.shields.io/badge/platform-Chrome%20%7C%20Tampermonkey-8b5cf6?style=flat-square" alt="platform">
+  <img src="https://img.shields.io/badge/platform-Chrome%20%7C%20Tampermonkey%20%7C%20Windows-8b5cf6?style=flat-square" alt="platform">
 </p>
 
 ---
@@ -20,7 +20,7 @@
 - **音频提取** — 独立下载音频轨道，支持多种码率选择
 - **高端UI设计** — 暗色主题 + 毛玻璃效果 + 渐变配色，视觉体验优秀
 - **低内存占用** — 纯原生 JavaScript 实现，无第三方依赖，占用极少资源
-- **双版本发布** — 同时提供油猴脚本和 Chrome 扩展两种使用方式
+- **三版本发布** — 油猴脚本、Chrome 扩展、Windows 桌面应用三种使用方式
 
 ---
 
@@ -46,6 +46,16 @@ weiruan-youtube-Download/
 │       ├── icon32.png
 │       ├── icon48.png
 │       └── icon128.png
+├── desktop-app/                          # Windows 桌面应用版本
+│   ├── main.py                           # 主入口 (pywebview + API)
+│   ├── ytdl_engine.py                    # yt-dlp 下载引擎
+│   ├── ui/
+│   │   ├── index.html                    # 桌面端 UI 页面
+│   │   ├── style.css                     # 桌面端样式
+│   │   └── app.js                        # 桌面端前端逻辑
+│   ├── requirements.txt                  # Python 依赖
+│   ├── build.bat                         # Windows 构建脚本
+│   └── run.bat                           # 快速启动脚本
 ├── LICENSE
 └── README.md
 ```
@@ -80,6 +90,43 @@ weiruan-youtube-Download/
 - 打开任意 YouTube 视频页面
 - 点击浏览器工具栏的威软下载图标
 - 在弹出面板中选择视频/音频/字幕进行下载
+
+### 方式三：Windows 桌面应用
+
+**环境要求：**
+- Python 3.10+
+- Windows 10/11（使用 WebView2 渲染引擎）
+- FFmpeg（推荐，用于合并视频+音频）
+
+**安装运行：**
+
+```bash
+cd desktop-app
+pip install -r requirements.txt
+python main.py
+```
+
+**打包为 EXE：**
+
+```bash
+cd desktop-app
+build.bat
+```
+
+打包完成后输出目录为 `dist/威软YouTube下载工具/`
+
+**使用方法：**
+- 粘贴 YouTube 链接到地址栏，点击「解析」或按回车
+- 「快速下载」标签：选择预设画质（4K / 2K / 1080p 等），一键下载
+- 「视频」标签：查看所有可用格式，自由选择下载
+- 「音频」标签：独立下载音频轨道
+- 「字幕」标签：下载 SRT / VTT 格式字幕
+- 点击底部文件夹图标可更改下载目录
+
+**桌面版技术栈：**
+- **pywebview** — 轻量级跨平台 WebView 容器（Windows 使用 WebView2）
+- **yt-dlp** — 强大的视频下载引擎
+- **PyInstaller** — Python 应用打包为 Windows 可执行文件
 
 ---
 

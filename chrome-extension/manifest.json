@@ -1,12 +1,14 @@
 {
   "manifest_version": 3,
   "name": "威软YouTube视频下载工具",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "高清YouTube视频下载工具 - 支持自由选择分辨率和字幕下载 | WeiRuan YouTube Downloader",
   "author": "威软科技 (WeiRuan Tech)",
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "scripting",
+    "downloads"
   ],
   "host_permissions": [
     "*://*.youtube.com/*",

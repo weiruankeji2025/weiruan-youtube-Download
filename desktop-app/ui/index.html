@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>威软YouTube视频下载工具</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ═══ Header ═══ -->
+  <header id="app-header">
+    <div class="header-left">
+      <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#c084fc"/></linearGradient></defs>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <h1 id="app-title">威软YouTube视频下载工具</h1>
+    </div>
+    <div class="header-right">
+      <span id="version-badge">v1.0.0</span>
+    </div>
+  </header>
+
+  <!-- ═══ URL Input ═══ -->
+  <section id="url-section">
+    <div class="url-bar">
+      <svg class="url-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+      <input id="url-input" type="text" placeholder="粘贴 YouTube 视频链接..." spellcheck="false" autocomplete="off">
+      <button id="fetch-btn" title="获取视频信息">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span>解析</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══ Loading ═══ -->
+  <div id="loading" class="hidden">
+    <div class="spinner"></div>
+    <span>正在解析视频信息...</span>
+  </div>
+
+  <!-- ═══ Error ═══ -->
+  <div id="error-msg" class="hidden"></div>
+
+  <!-- ═══ Video Info ═══ -->
+  <section id="video-info" class="hidden">
+    <div class="info-card">
+      <img id="video-thumb" alt="缩略图">
+      <div class="info-text">
+        <h2 id="video-title"></h2>
+        <div class="info-meta">
+          <span id="video-channel"></span>
+          <span class="dot">·</span>
+          <span id="video-duration"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Tab Bar ═══ -->
+  <nav id="tab-bar" class="hidden">
+    <button class="tab active" data-tab="preset">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      快速下载
+    </button>
+    <button class="tab" data-tab="video">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      视频
+    </button>
+    <button class="tab" data-tab="audio">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      音频
+    </button>
+    <button class="tab" data-tab="subtitle">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="7" y1="15" x2="17" y2="15"/><line x1="7" y1="11" x2="13" y2="11"/></svg>
+      字幕
+    </button>
+  </nav>
+
+  <!-- ═══ Tab Panels ═══ -->
+  <div id="panels" class="hidden">
+
+    <!-- Preset Download -->
+    <div class="panel active" data-panel="preset">
+      <div class="preset-grid">
+        <button class="preset-btn" data-height="2160">
+          <span class="preset-label">4K</span>
+          <span class="preset-desc">2160p 超高清</span>
+        </button>
+        <button class="preset-btn" data-height="1440">
+          <span class="preset-label">2K</span>
+          <span class="preset-desc">1440p 高清</span>
+        </button>
+        <button class="preset-btn recommended" data-height="1080">
+          <span class="preset-label">1080p</span>
+          <span class="preset-desc">全高清 推荐</span>
+        </button>
+        <button class="preset-btn" data-height="720">
+          <span class="preset-label">720p</span>
+          <span class="preset-desc">高清</span>
+        </button>
+        <button class="preset-btn" data-height="480">
+          <span class="preset-label">480p</span>
+          <span class="preset-desc">标清</span>
+        </button>
+        <button class="preset-btn" data-height="">
+          <span class="preset-label">最佳</span>
+          <span class="preset-desc">最高画质</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Video Formats -->
+    <div class="panel" data-panel="video">
+      <div id="video-list" class="format-list"></div>
+    </div>
+
+    <!-- Audio Formats -->
+    <div class="panel" data-panel="audio">
+      <div id="audio-list" class="format-list"></div>
+    </div>
+
+    <!-- Subtitles -->
+    <div class="panel" data-panel="subtitle">
+      <div id="subtitle-list" class="format-list"></div>
+      <div id="no-subtitles" class="empty-hint hidden">此视频没有可用字幕</div>
+    </div>
+  </div>
+
+  <!-- ═══ Progress ═══ -->
+  <div id="progress-bar" class="hidden">
+    <div class="progress-track">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+    <div class="progress-info">
+      <span id="progress-text">准备中...</span>
+      <span id="progress-speed"></span>
+    </div>
+  </div>
+
+  <!-- ═══ Footer ═══ -->
+  <footer id="app-footer">
+    <button id="dir-btn" title="选择下载目录">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+      </svg>
+      <span id="dir-path">~/Downloads</span>
+    </button>
+    <span class="footer-brand">威软科技 © 2026</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
